@@ -2,18 +2,17 @@ import express from "express";
 import path from "path";
 import http from "http";
 
-const app = express;
+const app = express();
 
 app.set("port", process.env.PORT || 9900);
 app.use(express.static(path.join(__dirname, "public")));
 
 // Set up express
-const server = http.createServer(app).listen(app.get("port"), function () {
+const server = http.createServer(app).listen(app.get("port"), () => {
   console.log("Express server listening on port " + app.get("port"));
 });
 
-const io = require("socket.io");
-io.listen(server);
+const io = require('socket.io')(server);
 
 let users = [];
 

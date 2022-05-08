@@ -25,10 +25,11 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const socket = io();
+      let socket = io();
       let isNickSet = false;
+
       // chat event
-      socket.on("chat", function () {
+      socket.on("chat", function (data) {
         $("textarea").val($("textarea").val() + data + "\n");
       });
 
@@ -41,7 +42,7 @@
         });
 
         let total = data.length;
-        document.getElementsById("listu").innerHTML = total;
+        document.getElementById("listu").innerHTML = total;
         $("b").val(total);
       });
 
@@ -59,8 +60,8 @@
           event.preventDefault(); // stop refresh
 
           if (isNickSet) {
-            socket.emit("chat", () => {
-              message: $("#chatText").val();
+            socket.emit("chat",{
+              message:$("#chatText").val()
             });
           }
 
@@ -80,10 +81,11 @@
 
           <form action="">
             <div class="mb-3">
-              <button id="nick" class="btn btn-outline-primary">
+              <input id="nickText" type="text" class="form-control" />
+              
+              <button id="nick" class="btn btn-primary mt-2">
                 Set Nickname
               </button>
-              <input id="nickText" type="text" class="form-control" />
             </div>
 
             <div class="mb-3">
@@ -93,12 +95,17 @@
             <hr />
 
             <div class="mb-3">
-              <button id="chat" class="btn btn-outline-primary">
-                Send Ch at Message
-              </button>
               <input id="chatText" type="text" class="form-control" />
+              
+              <button id="chat" class="btn btn-primary mt-2">
+                Send Chat Message
+              </button>
             </div>
           </form>
+        </div>
+        <div class="col-md-6" >
+          <h1>Active users: <span id="listu"></span></h1>
+          <div id="activeuser" class="h-100 border" ></div>
         </div>
       </div>
     </div>
