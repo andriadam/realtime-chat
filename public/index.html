@@ -60,12 +60,12 @@
           event.preventDefault(); // stop refresh
 
           if (isNickSet) {
-            socket.emit("chat",{
-              message:$("#chatText").val()
+            socket.emit("chat", {
+              message: $("#chatText").val(),
             });
           }
 
-          $("#chatText").val('');
+          $("#chatText").val("");
         });
       });
     </script>
@@ -80,12 +80,15 @@
           <h1>Simple chat with node</h1>
 
           <form action="">
-            <div class="mb-3">
-              <input id="nickText" type="text" class="form-control" />
-              
-              <button id="nick" class="btn btn-primary mt-2">
-                Set Nickname
-              </button>
+            <div class="row mb-3">
+              <div class="col-auto">
+                <input id="nickText" type="text" class="form-control" />
+              </div>
+              <div class="col-auto">
+                <button id="nick" class="btn btn-warning">
+                  Set Nickname
+                </button>
+              </div>
             </div>
 
             <div class="mb-3">
@@ -96,16 +99,16 @@
 
             <div class="mb-3">
               <input id="chatText" type="text" class="form-control" />
-              
+
               <button id="chat" class="btn btn-primary mt-2">
                 Send Chat Message
               </button>
             </div>
           </form>
         </div>
-        <div class="col-md-6" >
+        <div class="col-md-6">
           <h1>Active users: <span id="listu"></span></h1>
-          <div id="activeuser" class="h-100 border" ></div>
+          <div id="activeuser" class="h-100 border"></div>
         </div>
       </div>
     </div>
